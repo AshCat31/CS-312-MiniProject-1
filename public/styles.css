@@ -1,71 +1,102 @@
+:root {
+    --font-family: sans-serif;
+    --font-color: #39316b;
+    --body-background: #f5fbfd;
+    --primary: #a5e5f8;
+    --primary-hover: #8ed8ef;
+    --secondary: #ad9df1;
+    --secondary-hover: #c1b6f2;
+    --light: #edf8fb;
+    --white: #ffffff;
+    --border-color: #8b9aae;
+    --border-dark: #39316b;
+    --border-width: 1px;
+    --border-radius: 4px;
+    --outline-color: #6d5fb0;
+    --delete: #e06b72;
+    --delete-text: #fff;
+    --header-font-size: 25px;
+    --title-font-size: 25px;
+    --body-font-size: 16px;
+    --button-font-size: 15px;
+    --category-font-size: 14px;
+    --page-padding: 10px;
+    --post-padding: 12px;
+    --content-padding: 18px 12px;
+    --button-padding: 7px 12px;
+    --gap: 12px;
+}
 * {
     box-sizing: border-box;
-    border-radius: 0;
 }
 body {
     margin: 0;
-    font-family: sans-serif;
-    color: #111;
-    background: white;
+    font-family: var(--font-family);
+    color: var(--font-color);
+    background: var(--body-background);
+    font-size: var(--body-font-size);
 }
 header {
-    height: 48px;
+    height: 52px;
     display: flex;
     align-items: center;
-    padding: 0 6px;
-    border-bottom: 3px solid #111;
+    padding: 0 10px;
+    background: var(--primary);
+    border-bottom: 3px solid var(--border-dark);
 }
 header h1 {
     margin: 0;
-    font-size: 25px;
+    font-size: var(--header-font-size);
     font-weight: 400;
 }
 .page {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: var(--gap);
     width: 100%;
-    padding: 8px;
+    padding: var(--page-padding);
 }
 .posts {
     flex: 1;
 }
 .create-post {
     flex-shrink: 0;
-    font-size: 25px;
+    font-size: var(--header-font-size);
     font-weight: 400;
-    padding: 7px 10px;
-    background: white;
-    border: 1px solid #aaa;
-    border-radius: 2px;
+    padding: var(--button-padding);
+    background: var(--secondary);
+    color: var(--font-color);
+    border: var(--border-width) solid var(--border-dark);
+    border-radius: var(--border-radius);
 }
 .create-post:hover {
-    background: #f5f5f5;
+    background: var(--secondary-hover);
 }
 .post {
-    margin-bottom: 14px;
-    border: 1px solid #aaa;
-    padding: 10px;
+    margin-bottom: 12px;
+    border: var(--border-width) solid var(--border-color);
+    padding: var(--post-padding);
+    background: var(--white);
 }
 .post-header {
     display: flex;
     align-items: center;
     height: max-content;
-    padding: 0 0 7px;
+    padding: 0 0 8px;
 }
 .post-title {
     margin: 0;
-    font-size: 25px;
+    font-size: var(--title-font-size);
     font-weight: 400;
-    line-height: 1;
 }
 .category {
     margin-left: 10px;
-    padding: 5px 7px;
-    font-size: 15px;
-    line-height: 1;
-    background: #f3f3f3;
-    border-radius: 2px;
+    padding: 5px 8px;
+    font-size: var(--category-font-size);
+    background: var(--primary);
+    color: var(--font-color);
+    border: var(--border-width) solid #76bfd4;
+    border-radius: var(--border-radius);
 }
 .post-actions {
     display: flex;
@@ -77,35 +108,39 @@ header h1 {
 }
 button {
     cursor: pointer;
+    font-family: var(--font-family);
 }
 button.delete {
-    background-color: #e91818 !important;
-    color: #ececec;
+    background-color: var(--delete) !important;
+    color: var(--delete-text);
 }
 .post-actions button {
     width: 60px;
     height: 34px;
     padding: 0;
-    background: white;
-    border: 1px solid #aaa;
-    border-radius: 2px;
-    font-size: 15px;
+    background: var(--white);
+    color: var(--font-color);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: var(--button-font-size);
 }
 .post-actions button:hover {
-    background: #f3f3f3;
+    background: var(--secondary);
 }
 .post-info {
     display: flex;
     gap: 18px;
     margin-top: 2px;
-    font-size: 16px;
+    font-size: var(--body-font-size);
+    color: #635a91;
 }
 .post-content {
-    margin: 6px 0 0;
-    padding: 20px 10px;
-    background: #fafafa;
-    font-size: 16px;
-    color: #333;
+    margin: 8px 0 0;
+    padding: var(--content-padding);
+    background: var(--light);
+    font-size: var(--body-font-size);
+    color: var(--font-color);
+    border: var(--border-width) solid #d5e8ed;
 }
 .modal-overlay {
     position: fixed;
@@ -114,7 +149,7 @@ button.delete {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    background: rgba(0, 0, 0, 0.28);
+    background: rgba(57, 49, 107, 0.3);
     z-index: 999999;
 }
 .modal-overlay.open {
@@ -122,21 +157,24 @@ button.delete {
 }
 .modal {
     width: 745px;
-    padding: 8px;
-    background: white;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.18);
+    padding: 10px;
+    background: var(--white);
+    border: 2px solid var(--border-dark);
+    box-shadow: 0 3px 15px rgba(57, 49, 107, 0.18);
 }
 .modal input,
 .modal select,
 .modal textarea {
     display: block;
     width: 100%;
-    margin: 0 0 3px;
-    padding: 5px;
-    background: white;
-    border: 1px solid #aaa;
-    font-family: sans-serif;
-    font-size: 16px;
+    margin: 0 0 5px;
+    padding: 7px;
+    background: var(--body-background);
+    color: var(--font-color);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-family: var(--font-family);
+    font-size: var(--body-font-size);
 }
 .modal input,
 .modal select {
@@ -146,21 +184,29 @@ button.delete {
     height: 250px;
     resize: none; /* handle appers if not present */
 }
+.modal input:focus,
+.modal select:focus,
+.modal textarea:focus {
+    outline: 2px solid var(--outline-color);
+    outline-offset: 1px;
+}
 .modal-footer {
     display: flex;
     justify-content: flex-end;
     gap: 8px;
+    margin-top: 5px;
 }
 .modal-footer button {
     min-width: 85px;
     height: 39px;
-    background: white;
-    border: 1px solid #aaa;
-    border-radius: 2px;
-    font-size: 16px;
+    background: var(--white);
+    color: var(--font-color);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: var(--button-font-size);
 }
 .modal-footer button:hover {
-    background: #f3f3f3;
+    background: var(--secondary-hover);
 }
 /* roughly ipad size */
 @media (max-width: 1000px) {
