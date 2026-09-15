@@ -1,0 +1,29 @@
+# Deps
+Express.js (for server), EJS (for forms+dynamic rendering)
+
+
+# Pages
+## Homepage
+### form (req on homepage)
+creates new post. EJS for form submission. on submission, add to server side list
+Fields: creator name, creation time (js date obj), title, content, category (bonus)
+off to the side? modal?
+
+### post list (req on homepage)
+render w EJS dynamically. update upon post added, edited, or deleted--whenever list changes
+display title, author, date, category, content. display options to edit and delete (prolly btns not menu)
+- Edit:
+-- is edit new page? modal? elsewhere?
+-- original vpost vals fill fields
+
+
+# Concepts
+Post list, server side. no persistence
+Post obj (title, name, date, category, content)
+Forms (new, edit)
+NOT A CONCEPT: auth. anyone can edit or delete any post
+
+
+# Style
+responsive, looks good, mobile and desktop
+bootstrap is an option but prolly not
