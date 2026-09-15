@@ -48,13 +48,15 @@
         <div class="modal">
             <form id="postForm" action="/posts" method="POST"> <input type="text" id="title" name="title"
                     placeholder="Title" required> <input type="text" id="author" name="name" placeholder="Author"
-                    required> <select id="category" name="category">
-                    <option value="">Category</option>
+                    required>
+                <select id="category" name="category">
+                    <option value="" disabled selected>Category (optional)</option>
                     <option value="Technology">Technology</option>
                     <option value="Travel">Travel</option>
                     <option value="Food">Food</option>
                     <option value="Sports">Sports</option>
-                </select> <textarea id="content" name="content" placeholder="Content..." required></textarea>
+                </select>
+                <textarea id="content" name="content" placeholder="Content..." required></textarea>
                 <div class="modal-footer"> <button type="button" onclick="closeModal()">Cancel</button> <button
                         type="submit">Save</button> </div>
             </form>
