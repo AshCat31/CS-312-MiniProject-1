@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Blog Website</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            border-radius: 0;
+        }
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            color: #111;
+            background: white;
+        }
+        header {
+            height: 48px;
+            display: flex;
+            align-items: center;
+            padding: 0 6px;
+            border-bottom: 3px solid #111;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 25px;
+            font-weight: 400;
+        }
+        .page {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            width: 100%;
+            padding: 8px;
+        }
+        .posts {
+            flex: 1;
+        }
+        .create-post {
+            flex-shrink: 0;
+            font-size: 25px;
+            font-weight: 400;
+            padding: 7px 10px;
+            background: white;
+            border: 1px solid #aaa;
+            border-radius: 2px;
+        }
+        .create-post:hover {
+            background: #f5f5f5;
+        }
+        .post {
+            margin-bottom: 14px;
+            border: 1px solid #aaa;
+            padding: 10px;
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            height: max-content;
+            padding: 0 0 7px;
+        }
+        .post-title {
+            margin: 0;
+            font-size: 25px;
+            font-weight: 400;
+            line-height: 1;
+        }
+        .category {
+            margin-left: 10px;
+            padding: 5px 7px;
+            font-size: 15px;
+            line-height: 1;
+            background: #f3f3f3;
+            border-radius: 2px;
+        }
+        .post-actions {
+            display: flex;
+            gap: 7px;
+            margin-left: auto;
+        }
+        button {
+            cursor: pointer;
+        }
+        button.delete {
+            background-color: #e91818 !important;
+            color: #ececec;
+        }
+        .post-actions button {
+            width: 60px;
+            height: 34px;
+            padding: 0;
+            background: white;
+            border: 1px solid #aaa;
+            border-radius: 2px;
+            font-size: 15px;
+        }
+        .post-actions button:hover {
+            background: #f3f3f3;
+        }
+        .post-info {
+            display: flex;
+            gap: 18px;
+            margin-top: 2px;
+            font-size: 16px;
+        }
+        .post-content {
+            margin: 6px 0 0;
+            padding: 20px 10px;
+            background: #fafafa;
+            font-size: 16px;
+            color: #333;
+        }
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.28);
+            z-index: 999999;
+        }
+        .modal-overlay.open {
+            display: flex;
+        }
+        .modal {
+            width: 745px;
+            padding: 8px;
+            background: white;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.18);
+        }
+        .modal input,
+        .modal select,
+        .modal textarea {
+            display: block;
+            width: 100%;
+            margin: 0 0 3px;
+            padding: 5px;
+            background: white;
+            border: 1px solid #aaa;
+            font-family: sans-serif;
+            font-size: 16px;
+        }
+        .modal input,
+        .modal select {
+            height: 35px;
+        }
+        .modal textarea {
+            height: 250px;
+            resize: none; /* handle appers if not present */
+        }
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+        .modal-footer button {
+            min-width: 85px;
+            height: 39px;
+            background: white;
+            border: 1px solid #aaa;
+            border-radius: 2px;
+            font-size: 16px;
+        }
+        .modal-footer button:hover {
+            background: #f3f3f3;
+        }
+        /* roughly ipad size */
+        @media (max-width: 1000px) {
+            /* so far just moves create post to top */
+            .page {
+                flex-direction: column;
+            }
+            .posts {
+                width: 100%;
+            }
+            .create-post {
+                order: -1; /* needed to move to top */
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Blog Website</h1>
+    </header>
+    <main class="page">
+        <section class="posts">
+            <article class="post">
+                <div class="post-header">
+                    <h2 class="post-title">Post Title</h2>
+                    <span class="category">Category</span>
+                    <div class="post-actions">
+                        <button type="button" onclick="editPost(this)" title="Edit">Edit</button>
+                        <button class="delete" type="button" onclick="deletePost(this)" title="Delete">Delete</button>
+                    </div>
+                </div>
+                <div class="post-info">
+                    <span>Author</span>
+                    <span>Date</span>
+                </div>
+                <div class="post-content">
+                    Content...
+                </div>
+            </article>
+            <article class="post">
+                <div class="post-header">
+                    <h2 class="post-title">A Long Winded and Unnecessary Introduction to Cooking my Favorite Recipe</h2>
+                    <span class="category">Food</span>
+                    <div class="post-actions">
+                        <button type="button" onclick="editPost(this)" title="Edit">Edit</button>
+                        <button class="delete" type="button" onclick="deletePost(this)" title="Delete">Delete</button>
+                    </div>
+                </div>
+                <div class="post-info">
+                    <span>First Lastname</span>
+                    <span>9/14/2026</span>
+                </div>
+                <div class="post-content">
+                    This is a long winded and wholly necessary introduction to my favorite dish. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. 
+                </div>
+            </article>
+        </section>
+        <button class="create-post" onclick="openModal()">
+            Create Post
+        </button>
+    </main>
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <input type="text" id="title" placeholder="Title">
+            <input type="text" id="author" placeholder="Author">
+            <select id="category">
+                <option value="">Category</option>
+                <option value="Technology">Technology</option>
+                <option value="Travel">Travel</option>
+                <option value="Food">Food</option>
+                <option value="Sports">Sports</option>
+            </select>
+            <textarea id="content" placeholder="Content..."></textarea>
+            <div class="modal-footer">
+                <button type="button" onclick="closeModal()">Cancel</button>
+                <button type="button" onclick="savePost()">Save</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const modalOverlay = document.getElementById("modalOverlay");
+        function openModal() {
+            modalOverlay.classList.add("open");
+        }
+        function closeModal() {
+            modalOverlay.classList.remove("open");
+        }
+        function savePost() {
+            const title = document.getElementById("title").value;
+            const author = document.getElementById("author").value;
+            const category = document.getElementById("category").value;
+            const content = document.getElementById("content").value;
+            console.log({
+                title,
+                author,
+                category,
+                content
+            });
+            closeModal();
+        }
+        function editPost(button) {
+            const post = button.closest(".post");
+            const title = post.querySelector(".post-title").textContent.trim();
+            const category = post.querySelector(".category").textContent.trim();
+            const content = post.querySelector(".post-content").textContent.trim();
+            document.getElementById("title").value = title;
+            document.getElementById("category").value = category;
+            document.getElementById("content").value = content;
+            openModal();
+        }
+        function deletePost(button) {
+            button.closest(".post").remove();
+        }
+        modalOverlay.addEventListener("click", function(event) {
+            if (event.target == modalOverlay) {
+                closeModal();
+            }
+        });
+        document.addEventListener("keydown", function(event) {
+            if (event.key == "Escape") {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
